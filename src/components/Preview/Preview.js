@@ -11,6 +11,10 @@ import MusicNoteIcon from "@material-ui/icons/MusicNote";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import CropIcon from "@material-ui/icons/Crop";
 import TimerIcon from "@material-ui/icons/Timer";
+import SendIcon from "@material-ui/icons/Send";
+import { v4 as uuid } from "uuid";
+import { db, storage } from "../../firebase";
+import firebase from "firebase";
 
 function Preview() {
     const cameraImage = useSelector(selectCameraImage);
@@ -28,6 +32,39 @@ function Preview() {
         history.replace("/");
     };
 
+    const sendPost = () => {
+        const id = uuid();
+        const uploadTask = storage
+            .ref(`posts/${id}`)
+            .putString(cameraImage, "data_url");
+
+        uploadTask.on(
+            "state_changed",
+            null,
+            (err) => {
+                // ERROR function
+                console.log(err);
+            },
+            () => {
+                // COMPLETE function
+                storage
+                    .ref('posts')
+                    .child(id)
+                    .getDownloadURL()
+                    .then(url => {
+                        db.collection("posts").add({
+                            imageUrl: url,
+                            username: "Corey Burkett",
+                            read: false,
+                            // profilePic,
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        });
+                        history.replace("/chat");
+                    });
+            }
+        );
+    };
+
     return (
         <div className="preview">
             <CloseIcon onClick={closePreview} className="preview__close"/>
@@ -41,6 +78,10 @@ function Preview() {
                 <TimerIcon />
             </div>
             <img src={cameraImage} alt="Camera image"/>
+            <div onClick={sendPost} className="preview__footer">
+                <h2>Send Now</h2>
+                <SendIcon fontSize="small" className="preview__sendIcon" />
+            </div>
         </div>
     )
 }
