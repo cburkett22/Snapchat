@@ -10,6 +10,8 @@ import { login, logout, selectUser } from './features/appSlice';
 import Login from './components/Login/Login';
 import { auth } from './firebase';
 
+// ***IMPORTANT*** - If you changed any files you HAVE to run 'npm run build' in the cli everytime!!!
+
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
