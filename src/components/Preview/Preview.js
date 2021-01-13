@@ -31,7 +31,6 @@ function Preview() {
 
     const closePreview = () => {
         dispatch(resetCameraImage());
-        history.replace("/");
     };
 
     const sendPost = () => {
@@ -43,25 +42,27 @@ function Preview() {
         uploadTask.on(
             "state_changed",
             null,
-            (err) => {
+            (error) => {
                 // ERROR function
-                console.log(err);
+                console.log(error);
             },
             () => {
                 // COMPLETE function
                 storage
-                    .ref('posts')
+                    .ref("posts")
                     .child(id)
                     .getDownloadURL()
-                    .then(url => {
+                    .then((url) => {
                         db.collection("posts").add({
                             imageUrl: url,
-                            username: "Corey Burkett",
+                            username: user.username,
                             read: false,
                             profilePic: user.profilePic,
                             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                         });
                         history.replace("/chats");
+                    }).catch((error) => {
+                        console.log(error);
                     });
             }
         );

@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     background-color: #fefc01;
-    height: 100vh;
+    height: 120vh;
 }
 
 .app__logo {
@@ -16,11 +16,23 @@
     background: url("https://www.pngkey.com/png/full/859-8598072_picture-freeuse-library-silhouette-mobile-at-getdrawings-cell.png") no-repeat center;
     background-size: contain;
     height: 400px;
-    /* width: 250px; */
     padding: 74px;
 }
 
 .app__bodyBackground {
     background-color: white;
     height: 400px;
+}
+
+.app__bodyInstructions > h1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.app__bodyInstructions > h3 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
 }

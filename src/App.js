@@ -58,6 +58,16 @@ function App() {
                 </Switch>
               </div>
             </div>
+            <div className="app__bodyInstructions">
+              <h1>Instructions:</h1>
+              <h3>1. Click the small gray circle to take a snap</h3>
+              <h3>2. Smile for the camera and click the circle again!</h3>
+              <h3>3. Click the "X" in the top left hand corner to re-take another snap</h3>
+              <h3>4. If it looks good, click "Send Now" on the bottom</h3>
+              <h3>5. Click the most recent snap with the red square on the right to view your selfie</h3>
+              <h3>(After 10 seconds passes OR you click the screen you, or anyone else, will NOT be able to view the snap again!)</h3>
+              <h3>6. Lastly, click your avatar picture at the very top left to Sign Out</h3>
+            </div>
           </>
         )}
       </Router>
